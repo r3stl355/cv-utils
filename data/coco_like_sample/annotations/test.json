@@ -1,0 +1,103 @@
+{
+  "info": {
+    "description": "COCO Like Dataset",
+    "url": "",
+    "version": "1.0",
+    "contributor": "r3stl355",
+    "date_created": "2021/03/25"
+  },
+  "licenses": [
+    {
+      "url": "",
+      "id": 1,
+      "name": "No known copyright restrictions"
+    }
+  ],
+  "images": [
+    {
+      "license": 1,
+      "file_name": "test1.png",
+      "coco_url": "test/test_1.png",
+      "height": 600,
+      "width": 800,
+      "date_captured": "2021-03-5 08:36:22",
+      "id": 1
+    },
+    {
+      "license": 1,
+      "file_name": "test2.png",
+      "coco_url": "test/test_2.png",
+      "height": 600,
+      "width": 800,
+      "date_captured": "2021-03-15 22:05:00",
+      "id": 2
+    }
+  ],
+  "annotations": [
+    {
+      "image_id": 1,
+      "area": 182984.0,
+      "bbox": [
+        39.0,
+        126.0,
+        514.0,
+        356.0
+      ],
+      "category_id": 1,
+      "id": 0
+    },
+    {
+      "image_id": 1,
+      "area": 27744.0,
+      "bbox": [
+        639.0,
+        333.0,
+        136.0,
+        204.0
+      ],
+      "category_id": 2,
+      "id": 2
+    },
+    {
+      "image_id": 2,
+      "area": 21300.0,
+      "bbox": [
+        84.0,
+        358.0,
+        150.0,
+        142.0
+      ],
+      "category_id": 3,
+      "id": 3
+    },
+    {
+      "image_id": 2,
+      "area": 15618.0,
+      "bbox": [
+        558.0,
+        369.0,
+        137.0,
+        114.0
+      ],
+      "category_id": 3,
+      "id": 4
+    }
+  ],
+  "categories": [
+    {
+      "supercategory": "monitor",
+      "id": 1,
+      "name": "monitor"
+    },
+    {
+      "supercategory": "vase",
+      "id": 2,
+      "name": "vase"
+    },
+    {
+      "supercategory": "camera",
+      "id": 3,
+      "name": "camera"
+    }
+  ]
+}

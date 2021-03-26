@@ -12,8 +12,12 @@ git clone https://github.com/r3stl355/cv-utils.git
 cd cv-utils
 ```
 
-I often use Conda environments for my projects but you may have other preferences. Here is an example of setting up
-a Conda environment to test the scripts (install Anaconda or Miniconda first).
+I often use Conda environments for my projects but any other equivalent will do. Here is an
+example of setting up a Conda environment to test the scripts
+
+- First, install [Conda](https://docs.conda.io/en/latest/) (my personal preferece is Miniconda)
+- Then
+
 ```
 conda create -n cv-utils python=3.7
 conda activate cv-utils
@@ -30,9 +34,13 @@ does not launch automatically, just copy/paste the URL shown in the Terminal to 
 jupyter notebook
 ```
 
-## Build an RecordIO file from dataset in Pascal VOC format
+## Convert a dataset in Pascal VOC format to RecordIO format
 
 Check out `voc_2_rec.ipynb` Notebook for details. 
+
+## Convert a dataset in MS COCO format to RecordIO format
+
+Check out `coco_2_rec.ipynb` Notebook for details. 
 
 ## Shuffle and split an `.lst` file into `train` and `val` files
 
@@ -42,3 +50,5 @@ of `coreutils`
 ```
 source split_train_val.sh data/voc_like_sample test.lst gshuf
 ```
+
+and so on...
