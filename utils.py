@@ -39,30 +39,47 @@ def build_lst_record(img_path, w, h, bboxes, cids, idx):
     labels = labels.flatten().tolist()
     line = '\t'.join([str(idx)] + header + [str(x) for x in labels] + [img_path])
     return line
-
-
-def draw_bbox(img, bbox, label=None, color=None):
+        
+def draw_bbox(image, bbox, label=None, color=None):
 
     if color is None:
         color = [random.randint(0, 255) for _ in range(3)]
     x1, y1, x2, y2 = bbox
-    cv2.rectangle(img, (x1, y1), (x2, y2), color=color, thickness=5)
+    cv2.rectangle(image, (x1, y1), (x2, y2), color=color, thickness=5)
 
     # Assure label is visible
     if label is not None:
-        thickness = 2 if img.shape[0] < 1000 else 3 if img.shape[0] < 2000 else 6
-        font_scale = 0.8 if img.shape[0] < 1000 else 2 if img.shape[0] < 2000 else 3
-        label_h = 20 if img.shape[0] < 1000 else 70 if img.shape[0] < 2000 else 150
-        label_y1 = y1 - label_h
-        label_y2 = y1
-        if label_y1 < 0:
-            label_y1 = y2
-            label_y2 = y2 + label_h
-        if label_y2 > img.shape[0]:
-            label_y1 = y2 - label_h
-            label_y2 = y2
-        cv2.rectangle(img, (x1, label_y1), (x2, label_y2), color=color, thickness=cv2.FILLED)
-        cv2.putText(img, label, (x1 + 5, label_y2 - 2), cv2.FONT_HERSHEY_SIMPLEX, fontScale=font_scale,
+        # Assure label is visible
+        h, w = image.shape[:2]
+        thickness = 2 if w < 1000 else 3 if w < 2000 else 6
+        font_scale = 0.8 if w < 1000 else 2 if w < 2000 else 3
+        lbl_h = 20 if h < 1000 else 70 if h < 2000 else 150
+        lbl_y1 = y1 - lbl_h
+        lbl_y2 = y1
+        if lbl_y1 < 0:
+            lbl_y1, lbl_y2 = y2, y2 + lbl_h
+        elif lbl_y2 > h:
+            lbl_y1, lbl_y2 = y2 - lbl_h, y2
+        cv2.rectangle(image, (x1, lbl_y1), (x2, lbl_y2), color=color, thickness=cv2.FILLED)
+        cv2.putText(image, label, (x1 + 5, lbl_y2 - 2), cv2.FONT_HERSHEY_SIMPLEX, fontScale=font_scale,
                     color=(255, 255, 255), thickness=thickness, lineType=1)
 
 
+def denormalise_box(box, image):
+    x1, y1, x2, y2 = box
+    h, w = image.shape[:2]
+    x1 = clip(int(float(x1) * w), 0, w)
+    y1 = clip(int(float(y1) * h), 0, h)
+    x2 = clip(int(float(x2) * w), 0, w)
+    y2 = clip(int(float(y2) * h), 0, h)
+
+    return x1, y1, x2, y2
+
+
+def clip(val, min_val, max_val):
+    if val < min_val:
+        return min_val
+    elif val > max_val:
+        return max_val
+    else:
+        return val
